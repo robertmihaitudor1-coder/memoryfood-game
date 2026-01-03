@@ -3,13 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Food Memory</title>
+  <title>Food Memory – Menu</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="menuPage">
 
-  <!-- MENU OVERLAY -->
-  <div id="menuOverlay" class="overlay">
+  <div class="menuWrap">
     <div class="menuCard">
       <div class="menuTitle">🍔 Food Memory</div>
       <div class="menuSubtitle">Alege modul și dificultatea</div>
@@ -17,18 +16,18 @@
       <div class="menuSection">
         <div class="menuLabel">Mod</div>
         <div class="segmented">
-          <button id="modeSingle" class="segBtn active">Single Player</button>
-          <button id="modeMulti" class="segBtn">Multiplayer (2P)</button>
+          <button id="modeSingle" class="segBtn active" type="button">Single Player</button>
+          <button id="modeMulti" class="segBtn" type="button">Multiplayer (2P)</button>
         </div>
         <div class="menuHint">Multiplayer = 2 jucători pe același device (pe rând, cu scor).</div>
       </div>
 
-      <div class="menuSection" id="difficultyWrap">
+      <div class="menuSection" id="diffSection">
         <div class="menuLabel">Dificultate</div>
         <div class="difficultyGrid">
-          <button class="diffBtn active" data-diff="easy">Easy (4×4)</button>
-          <button class="diffBtn" data-diff="medium">Medium (6×4)</button>
-          <button class="diffBtn" data-diff="hard">Hard (8×6)</button>
+          <button class="diffBtn active" data-diff="easy" type="button">Easy (4×4)</button>
+          <button class="diffBtn" data-diff="medium" type="button">Medium (6×4)</button>
+          <button class="diffBtn" data-diff="hard" type="button">Hard (8×6)</button>
         </div>
       </div>
 
@@ -38,60 +37,31 @@
             <input type="checkbox" id="soundToggle" checked>
             <span>Sunete</span>
           </label>
-          <button id="howBtn" class="ghostBtn">How to play</button>
+
+          <button id="howBtn" class="ghostBtn" type="button">How to play</button>
+        </div>
+
+        <div id="howBox" class="howBox hidden">
+          <div class="howTitle">Cum se joacă</div>
+          <ul class="howList">
+            <li>Întorci 2 cartonașe. Dacă se potrivesc, rămân întoarse.</li>
+            <li>Dacă nu se potrivesc, se întorc la loc.</li>
+            <li>Single: termini cu cât mai puține mutări / timp.</li>
+            <li>Multi: pe rând; dacă faci match, mai ai o tură.</li>
+          </ul>
         </div>
       </div>
 
       <div class="menuSection">
-        <button id="startBtn" class="primaryBtn">Start</button>
+        <a id="startLink" class="primaryBtnLink" href="game.html?mode=single&diff=easy&sound=1">Start</a>
       </div>
 
-      <div id="howBox" class="howBox hidden">
-        <div class="howTitle">Cum se joacă</div>
-        <ul class="howList">
-          <li>Întorci 2 cartonașe. Dacă se potrivesc, rămân întoarse.</li>
-          <li>Dacă nu se potrivesc, se întorc la loc.</li>
-          <li>Single: încerci să termini cu cât mai puține mutări / timp.</li>
-          <li>Multi: jucătorii joacă pe rând; dacă faci match, mai ai o tură.</li>
-        </ul>
+      <div class="menuFoot">
+        Tip: ai 24 imagini → Hard (8×6) e maximul perfect.
       </div>
     </div>
   </div>
 
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <div class="brand">🍔 Food Memory</div>
-
-    <!-- SINGLE HUD -->
-    <div id="hudSingle" class="stats">
-      <div class="pill">Moves: <span id="moves">0</span></div>
-      <div class="pill">Time: <span id="time">0:00</span></div>
-      <div class="pill">Score: <span id="score">0</span></div>
-      <div class="pill">Pairs: <span id="pairs">0</span>/<span id="totalPairs">0</span></div>
-    </div>
-
-    <!-- MULTI HUD -->
-    <div id="hudMulti" class="stats hidden">
-      <div class="pill">P1: <span id="p1">0</span></div>
-      <div class="pill">P2: <span id="p2">0</span></div>
-      <div class="pill">Turn: <span id="turn">P1</span></div>
-      <div class="pill">Time: <span id="time2">0:00</span></div>
-      <div class="pill">Pairs: <span id="pairs2">0</span>/<span id="totalPairs2">0</span></div>
-    </div>
-
-    <div class="actions">
-      <button id="menuBtn">Menu</button>
-      <button id="newGameBtn">New game</button>
-    </div>
-  </header>
-
-  <!-- BOARD -->
-  <main class="wrap">
-    <section id="board" class="board" aria-label="Memory board"></section>
-  </main>
-
-  <div id="toast" class="toast hidden"></div>
-
-  <script src="game.js"></script>
+  <script src="menu.js"></script>
 </body>
 </html>

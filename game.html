@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Food Memory – Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="gamePage">
+
+  <header class="topbar">
+    <div class="brand">🍔 Food Memory</div>
+
+    <!-- SINGLE HUD -->
+    <div id="hudSingle" class="stats">
+      <div class="pill">Moves: <span id="moves">0</span></div>
+      <div class="pill">Time: <span id="time">0:00</span></div>
+      <div class="pill">Score: <span id="score">0</span></div>
+      <div class="pill">Pairs: <span id="pairs">0</span>/<span id="totalPairs">0</span></div>
+    </div>
+
+    <!-- MULTI HUD -->
+    <div id="hudMulti" class="stats hidden">
+      <div class="pill">P1: <span id="p1">0</span></div>
+      <div class="pill">P2: <span id="p2">0</span></div>
+      <div class="pill">Turn: <span id="turn">P1</span></div>
+      <div class="pill">Time: <span id="time2">0:00</span></div>
+      <div class="pill">Pairs: <span id="pairs2">0</span>/<span id="totalPairs2">0</span></div>
+    </div>
+
+    <div class="actions">
+      <a class="btnLink" href="index.html">Menu</a>
+      <button id="newGameBtn" type="button">New game</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="board" class="board" aria-label="Memory board"></section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="game.js"></script>
+</body>
+</html>

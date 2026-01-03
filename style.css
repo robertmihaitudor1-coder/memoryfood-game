@@ -34,7 +34,118 @@ body{
   background-attachment: fixed;
 }
 
-/* TOPBAR */
+/* ---------- BUTTONS ---------- */
+button, .btnLink, .primaryBtnLink{
+  cursor:pointer;
+  padding:10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(20,30,60,.12);
+  background: rgba(255,255,255,.70);
+  color: var(--text);
+  box-shadow: var(--shadow2);
+  transition: transform .12s ease, filter .12s ease, border-color .12s ease;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+button:hover, .btnLink:hover, .primaryBtnLink:hover{
+  border-color: rgba(60,120,255,.28);
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+button:active, .btnLink:active, .primaryBtnLink:active{
+  transform: translateY(1px) scale(.99);
+}
+
+.hidden{ display:none !important; }
+
+/* ---------- MENU PAGE ---------- */
+.menuWrap{
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 22px;
+}
+
+.menuCard{
+  width: min(560px, 92vw);
+  border-radius: 24px;
+  background: rgba(255,255,255,.80);
+  border: 1px solid rgba(20,30,60,.12);
+  box-shadow: 0 22px 60px rgba(0,0,0,.18);
+  padding: 18px;
+}
+
+.menuTitle{ font-size: 30px; font-weight: 900; letter-spacing:.2px; }
+.menuSubtitle{ margin-top: 6px; color: var(--muted); }
+
+.menuSection{ margin-top: 16px; }
+.menuLabel{ font-weight: 900; margin-bottom: 10px; }
+.menuHint{ color: var(--muted); font-size: 13px; margin-top: 8px; }
+
+.segmented{ display:flex; gap:10px; }
+.segBtn{ flex:1; padding: 12px; }
+.segBtn.active{
+  border-color: rgba(60,120,255,.35);
+  background: rgba(90,140,255,.14);
+}
+
+.difficultyGrid{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.diffBtn{ padding: 12px 10px; }
+.diffBtn.active{
+  border-color: rgba(60,120,255,.35);
+  background: rgba(90,140,255,.14);
+}
+
+.menuRow{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.toggle{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 900;
+}
+.toggle input{ transform: scale(1.15); }
+
+.ghostBtn{ background: rgba(255,255,255,.65); }
+
+.primaryBtnLink{
+  width:100%;
+  padding: 13px 14px;
+  font-weight: 900;
+  background: rgba(60,120,255,.15);
+  border-color: rgba(60,120,255,.28);
+}
+
+.howBox{
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(20,30,60,.10);
+}
+.howTitle{ font-weight: 900; margin-bottom: 6px; }
+.howList{ margin: 0; padding-left: 18px; color: var(--muted); }
+
+.menuFoot{
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ---------- GAME PAGE ---------- */
 .topbar{
   display:flex;
   align-items:center;
@@ -43,7 +154,6 @@ body{
   position:sticky;
   top:0;
   z-index:20;
-
   background: rgba(255,255,255,.70);
   border-bottom: 1px solid rgba(20,30,60,.10);
   backdrop-filter: blur(10px);
@@ -72,29 +182,10 @@ body{
   color: var(--muted);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
 }
-.pill span{ color: var(--text); font-weight:800; }
+.pill span{ color: var(--text); font-weight:900; }
 
 .actions{ display:flex; gap:10px; }
-button{
-  cursor:pointer;
-  padding:10px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(20,30,60,.12);
-  background: rgba(255,255,255,.70);
-  color: var(--text);
-  box-shadow: var(--shadow2);
-  transition: transform .12s ease, filter .12s ease, border-color .12s ease;
-}
-button:hover{
-  border-color: rgba(60,120,255,.28);
-  transform: translateY(-1px);
-  filter: brightness(1.02);
-}
-button:active{ transform: translateY(1px) scale(.99); }
 
-.hidden{ display:none !important; }
-
-/* BOARD */
 .wrap{
   padding: 18px 16px 28px;
   display:flex;
@@ -105,7 +196,6 @@ button:active{ transform: translateY(1px) scale(.99); }
   width: min(760px, 96vw);
   display:grid;
   gap: 8px;
-  pointer-events: auto;
   position: relative;
   z-index: 1;
 }
@@ -125,7 +215,6 @@ button:active{ transform: translateY(1px) scale(.99); }
   background:none;
   box-shadow:none;
   cursor:pointer;
-  pointer-events:auto;
 }
 
 .inner{
@@ -139,9 +228,7 @@ button:active{ transform: translateY(1px) scale(.99); }
 
 .card.flipped .inner{ transform: rotateY(180deg); }
 
-.card.matched .inner{
-  outline: 3px solid var(--outlineGood);
-}
+.card.matched .inner{ outline: 3px solid var(--outlineGood); }
 
 .face{
   position:absolute;
@@ -171,138 +258,4 @@ button:active{ transform: translateY(1px) scale(.99); }
     radial-gradient(circle at 30% 30%, rgba(90,140,255,.16), rgba(255,255,255,.70) 60%),
     linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.45));
   display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size: 36px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.60);
-}
-
-.back{
-  transform: rotateY(180deg);
-  background:
-    radial-gradient(28px 28px at 30% 30%, rgba(255,190,120,.14), transparent 65%),
-    linear-gradient(180deg, var(--cardBack1), var(--cardBack2));
-  border: 1px solid rgba(20,30,60,.10);
-}
-
-.food-img{
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-  pointer-events: none;
-  filter: drop-shadow(0 8px 10px rgba(15,25,45,.18));
-}
-
-/* TOAST */
-.toast{
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,.82);
-  border: 1px solid rgba(20,30,60,.12);
-  padding: 10px 14px;
-  border-radius: 999px;
-  color: var(--text);
-  box-shadow: var(--shadow2);
-  z-index: 30;
-}
-
-/* MENU OVERLAY */
-.overlay{
-  position: fixed;
-  inset: 0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding: 20px;
-  background: rgba(10,14,25,.25);
-  backdrop-filter: blur(10px);
-  z-index: 50;
-}
-
-.menuCard{
-  width: min(520px, 92vw);
-  border-radius: 24px;
-  background: rgba(255,255,255,.78);
-  border: 1px solid rgba(20,30,60,.12);
-  box-shadow: 0 22px 60px rgba(0,0,0,.18);
-  padding: 18px;
-}
-
-.menuTitle{
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing:.2px;
-}
-.menuSubtitle{
-  margin-top: 4px;
-  color: var(--muted);
-}
-
-.menuSection{ margin-top: 16px; }
-.menuLabel{ font-weight: 800; margin-bottom: 8px; }
-.menuHint{ color: var(--muted); font-size: 13px; margin-top: 8px; }
-
-.segmented{
-  display:flex;
-  gap: 10px;
-}
-.segBtn{
-  flex: 1;
-  padding: 12px;
-}
-.segBtn.active{
-  border-color: rgba(60,120,255,.35);
-  background: rgba(90,140,255,.14);
-}
-
-.difficultyGrid{
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-}
-.diffBtn{
-  padding: 12px 10px;
-}
-.diffBtn.active{
-  border-color: rgba(60,120,255,.35);
-  background: rgba(90,140,255,.14);
-}
-
-.menuRow{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.toggle{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  font-weight: 800;
-}
-.toggle input{ transform: scale(1.2); }
-
-.ghostBtn{
-  background: rgba(255,255,255,.65);
-}
-
-.primaryBtn{
-  width: 100%;
-  padding: 13px 14px;
-  font-weight: 900;
-  background: rgba(60,120,255,.15);
-  border-color: rgba(60,120,255,.28);
-}
-
-.howBox{
-  margin-top: 14px;
-  padding: 12px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(20,30,60,.10);
-}
-.howTitle{ font-weight: 900; margin-bottom: 6px; }
-.howList{ margin: 0; padding-left: 18px; color: var(--muted); }
+  align-items:cente
