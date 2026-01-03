@@ -1,10 +1,11 @@
 (() => {
   const TOTAL_IMAGES = 24;
 
+  // FIX: avem COLS + ROWS + PAIRS
   const DIFFICULTIES = {
-    easy:   { cols: 4, pairs: 8 },
-    medium: { cols: 6, pairs: 12 },
-    hard:   { cols: 8, pairs: 24 },
+    easy:   { cols: 4, rows: 4, pairs: 8 },   // 16 cards
+    medium: { cols: 6, rows: 4, pairs: 12 },  // 24 cards
+    hard:   { cols: 8, rows: 6, pairs: 24 },  // 48 cards
   };
 
   const boardEl = document.getElementById("board");
@@ -28,7 +29,6 @@
   const pairs2El = document.getElementById("pairs2");
   const totalPairs2El = document.getElementById("totalPairs2");
 
-  // state
   let mode = "single";
   let diff = "easy";
   let soundOn = true;
@@ -53,10 +53,11 @@
 
   function qs(){
     const p = new URLSearchParams(location.search);
-    const m = (p.get("mode") || "single").toLowerCase();
-    const d = (p.get("diff") || "easy").toLowerCase();
-    const s = (p.get("sound") || "1");
-    return { mode: m, diff: d, sound: s };
+    return {
+      mode: (p.get("mode") || "single").toLowerCase(),
+      diff: (p.get("diff") || "easy").toLowerCase(),
+      sound: (p.get("sound") || "1"),
+    };
   }
 
   function showToast(msg){
@@ -112,8 +113,10 @@
     return shuffle([...picks, ...picks]).map((src, i)=>({ id:i, src }));
   }
 
+  // FIX: setăm exact grid-ul pentru fiecare dificultate
   function setBoardGrid(cols){
-    if (boardEl) boardEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    if (!boardEl) return;
+    boardEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
   }
 
   function createCard(data){
@@ -145,22 +148,22 @@
 
   function updateHUD(){
     if (mode === "single"){
-      if (hudSingle) hudSingle.classList.remove("hidden");
-      if (hudMulti) hudMulti.classList.add("hidden");
-      if (movesEl) movesEl.textContent = String(moves);
-      if (scoreEl) scoreEl.textContent = String(score);
-      if (pairsEl) pairsEl.textContent = String(matchedPairs);
-      if (totalPairsEl) totalPairsEl.textContent = String(totalPairs);
-      if (timeEl) timeEl.textContent = formatTime(seconds);
+      hudSingle?.classList.remove("hidden");
+      hudMulti?.classList.add("hidden");
+      movesEl && (movesEl.textContent = String(moves));
+      scoreEl && (scoreEl.textContent = String(score));
+      pairsEl && (pairsEl.textContent = String(matchedPairs));
+      totalPairsEl && (totalPairsEl.textContent = String(totalPairs));
+      timeEl && (timeEl.textContent = formatTime(seconds));
     } else {
-      if (hudSingle) hudSingle.classList.add("hidden");
-      if (hudMulti) hudMulti.classList.remove("hidden");
-      if (p1El) p1El.textContent = String(p1);
-      if (p2El) p2El.textContent = String(p2);
-      if (turnEl) turnEl.textContent = turn === 1 ? "P1" : "P2";
-      if (pairs2El) pairs2El.textContent = String(matchedPairs);
-      if (totalPairs2El) totalPairs2El.textContent = String(totalPairs);
-      if (time2El) time2El.textContent = formatTime(seconds);
+      hudSingle?.classList.add("hidden");
+      hudMulti?.classList.remove("hidden");
+      p1El && (p1El.textContent = String(p1));
+      p2El && (p2El.textContent = String(p2));
+      turnEl && (turnEl.textContent = turn === 1 ? "P1" : "P2");
+      pairs2El && (pairs2El.textContent = String(matchedPairs));
+      totalPairs2El && (totalPairs2El.textContent = String(totalPairs));
+      time2El && (time2El.textContent = formatTime(seconds));
     }
   }
 
@@ -283,7 +286,7 @@
     showToast(mode === "single" ? `🎮 Single: ${diff.toUpperCase()}` : "🎮 Multiplayer 2P");
   }
 
-  if (newGameBtn) newGameBtn.addEventListener("click", startGame);
+  newGameBtn && newGameBtn.addEventListener("click", startGame);
 
   // INIT
   const params = qs();
