@@ -1,11 +1,10 @@
 (() => {
   const TOTAL_IMAGES = 24;
 
-  // FIX: avem COLS + ROWS + PAIRS
   const DIFFICULTIES = {
-    easy:   { cols: 4, rows: 4, pairs: 8 },   // 16 cards
-    medium: { cols: 6, rows: 4, pairs: 12 },  // 24 cards
-    hard:   { cols: 8, rows: 6, pairs: 24 },  // 48 cards
+    easy:   { cols: 4, rows: 4, pairs: 8 },
+    medium: { cols: 6, rows: 4, pairs: 12 },
+    hard:   { cols: 8, rows: 6, pairs: 24 },
   };
 
   const boardEl = document.getElementById("board");
@@ -113,7 +112,6 @@
     return shuffle([...picks, ...picks]).map((src, i)=>({ id:i, src }));
   }
 
-  // FIX: setăm exact grid-ul pentru fiecare dificultate
   function setBoardGrid(cols){
     if (!boardEl) return;
     boardEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
@@ -288,7 +286,6 @@
 
   newGameBtn && newGameBtn.addEventListener("click", startGame);
 
-  // INIT
   const params = qs();
   mode = (params.mode === "multi") ? "multi" : "single";
   diff = params.diff;
