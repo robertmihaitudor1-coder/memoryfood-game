@@ -1,5 +1,4 @@
 :root{
-  /* pal, ușor pentru ochi */
   --bgA:#f4f7ff;
   --bgB:#eefaf7;
   --bgC:#fff7ef;
@@ -27,8 +26,6 @@ body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
   color: var(--text);
-
-  /* gradient foarte lin + lumini discrete */
   background:
     radial-gradient(900px 520px at 15% 10%, rgba(90,140,255,.10), transparent 65%),
     radial-gradient(800px 560px at 85% 20%, rgba(60,220,190,.08), transparent 65%),
@@ -37,6 +34,7 @@ body{
   background-attachment: fixed;
 }
 
+/* TOPBAR */
 .topbar{
   display:flex;
   align-items:center;
@@ -96,20 +94,17 @@ button:active{ transform: translateY(1px) scale(.99); }
 
 .hidden{ display:none !important; }
 
+/* BOARD */
 .wrap{
   padding: 18px 16px 28px;
   display:flex;
   justify-content:center;
 }
 
-/* board 8 coloane */
 .board{
   width: min(760px, 96vw);
   display:grid;
-  grid-template-columns: repeat(8, 1fr);
   gap: 8px;
-
-  /* FIX click: nimic nu blochează interacțiunea */
   pointer-events: auto;
   position: relative;
   z-index: 1;
@@ -120,10 +115,6 @@ button:active{ transform: translateY(1px) scale(.99); }
   aspect-ratio: 1 / 1;
   border-radius: var(--radius);
   perspective: 1000px;
-
-  /* FIX click */
-  pointer-events: auto;
-  z-index: 1;
 }
 
 .card button{
@@ -133,9 +124,8 @@ button:active{ transform: translateY(1px) scale(.99); }
   padding:0;
   background:none;
   box-shadow:none;
-
-  /* FIX click */
-  pointer-events: auto;
+  cursor:pointer;
+  pointer-events:auto;
 }
 
 .inner{
@@ -195,7 +185,6 @@ button:active{ transform: translateY(1px) scale(.99); }
   border: 1px solid rgba(20,30,60,.10);
 }
 
-/* Sticker-ul (imaginea) rămâne clară și “dominantă” */
 .food-img{
   width: 52px;
   height: 52px;
@@ -204,12 +193,13 @@ button:active{ transform: translateY(1px) scale(.99); }
   filter: drop-shadow(0 8px 10px rgba(15,25,45,.18));
 }
 
+/* TOAST */
 .toast{
   position: fixed;
   left: 50%;
   bottom: 18px;
   transform: translateX(-50%);
-  background: rgba(255,255,255,.80);
+  background: rgba(255,255,255,.82);
   border: 1px solid rgba(20,30,60,.12);
   padding: 10px 14px;
   border-radius: 999px;
@@ -218,7 +208,101 @@ button:active{ transform: translateY(1px) scale(.99); }
   z-index: 30;
 }
 
-@media (max-width: 420px){
-  .board{ gap: 6px; }
-  .food-img{ width: 46px; height: 46px; }
+/* MENU OVERLAY */
+.overlay{
+  position: fixed;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+  background: rgba(10,14,25,.25);
+  backdrop-filter: blur(10px);
+  z-index: 50;
 }
+
+.menuCard{
+  width: min(520px, 92vw);
+  border-radius: 24px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(20,30,60,.12);
+  box-shadow: 0 22px 60px rgba(0,0,0,.18);
+  padding: 18px;
+}
+
+.menuTitle{
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing:.2px;
+}
+.menuSubtitle{
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.menuSection{ margin-top: 16px; }
+.menuLabel{ font-weight: 800; margin-bottom: 8px; }
+.menuHint{ color: var(--muted); font-size: 13px; margin-top: 8px; }
+
+.segmented{
+  display:flex;
+  gap: 10px;
+}
+.segBtn{
+  flex: 1;
+  padding: 12px;
+}
+.segBtn.active{
+  border-color: rgba(60,120,255,.35);
+  background: rgba(90,140,255,.14);
+}
+
+.difficultyGrid{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.diffBtn{
+  padding: 12px 10px;
+}
+.diffBtn.active{
+  border-color: rgba(60,120,255,.35);
+  background: rgba(90,140,255,.14);
+}
+
+.menuRow{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.toggle{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 800;
+}
+.toggle input{ transform: scale(1.2); }
+
+.ghostBtn{
+  background: rgba(255,255,255,.65);
+}
+
+.primaryBtn{
+  width: 100%;
+  padding: 13px 14px;
+  font-weight: 900;
+  background: rgba(60,120,255,.15);
+  border-color: rgba(60,120,255,.28);
+}
+
+.howBox{
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(20,30,60,.10);
+}
+.howTitle{ font-weight: 900; margin-bottom: 6px; }
+.howList{ margin: 0; padding-left: 18px; color: var(--muted); }
