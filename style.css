@@ -265,7 +265,35 @@ button:active, .btnLink:active, .primaryBtnLink:active{
 }
 
 /* FIX: imaginile mari sunt “încadrate” în card */
+/* STICKER MODE (nu mai permite imagini full-card) */
 .food-img{
+  width: 64px;
+  height: 64px;
   max-width: 70%;
   max-height: 70%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 12px rgba(15,25,45,.20));
 }
+/* Face back: centru + badge */
+.back{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.back::before{
+  content:"";
+  position:absolute;
+  width: 72%;
+  height: 72%;
+  border-radius: 22px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(20,30,60,.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+}
+.back .food-img{
+  position: relative;
+  z-index: 1;
+}
+
