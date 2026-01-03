@@ -23,8 +23,8 @@
     modeSingle.classList.toggle("active", mode === "single");
     modeMulti.classList.toggle("active", mode === "multi");
 
-    // în multi folosim hard și ascundem dificultatea
-    diffSection.style.display = (mode === "single") ? "" : "none";
+    // Multiplayer = hard by default + ascunde dificultatea
+    if (diffSection) diffSection.style.display = (mode === "single") ? "" : "none";
     updateLink();
   }
 
@@ -34,21 +34,23 @@
     updateLink();
   }
 
-  modeSingle.addEventListener("click", () => setMode("single"));
-  modeMulti.addEventListener("click", () => setMode("multi"));
+  if (modeSingle) modeSingle.addEventListener("click", () => setMode("single"));
+  if (modeMulti)  modeMulti.addEventListener("click", () => setMode("multi"));
 
   diffBtns.forEach(btn => {
     btn.addEventListener("click", () => setDiff(btn.dataset.diff));
   });
 
-  soundToggle.addEventListener("change", (e) => {
-    sound = e.target.checked ? 1 : 0;
-    updateLink();
-  });
+  if (soundToggle) {
+    soundToggle.addEventListener("change", (e) => {
+      sound = e.target.checked ? 1 : 0;
+      updateLink();
+    });
+  }
 
-  howBtn.addEventListener("click", () => {
-    howBox.classList.toggle("hidden");
-  });
+  if (howBtn && howBox) {
+    howBtn.addEventListener("click", () => howBox.classList.toggle("hidden"));
+  }
 
   // init
   setMode("single");

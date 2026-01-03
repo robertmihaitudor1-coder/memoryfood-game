@@ -28,6 +28,7 @@
   const pairs2El = document.getElementById("pairs2");
   const totalPairs2El = document.getElementById("totalPairs2");
 
+  // state
   let mode = "single";
   let diff = "easy";
   let soundOn = true;
@@ -59,6 +60,7 @@
   }
 
   function showToast(msg){
+    if (!toastEl) return;
     toastEl.textContent = msg;
     toastEl.classList.remove("hidden");
     setTimeout(()=>toastEl.classList.add("hidden"), 1600);
@@ -75,8 +77,8 @@
     timerRunning = true;
     timer = setInterval(()=>{
       seconds++;
-      if (mode === "single") timeEl.textContent = formatTime(seconds);
-      else time2El.textContent = formatTime(seconds);
+      if (mode === "single" && timeEl) timeEl.textContent = formatTime(seconds);
+      if (mode === "multi" && time2El) time2El.textContent = formatTime(seconds);
     }, 1000);
   }
 
@@ -111,7 +113,7 @@
   }
 
   function setBoardGrid(cols){
-    boardEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    if (boardEl) boardEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
   }
 
   function createCard(data){
@@ -143,26 +145,25 @@
 
   function updateHUD(){
     if (mode === "single"){
-      hudSingle.classList.remove("hidden");
-      hudMulti.classList.add("hidden");
-      movesEl.textContent = String(moves);
-      scoreEl.textContent = String(score);
-      pairsEl.textContent = String(matchedPairs);
-      totalPairsEl.textContent = String(totalPairs);
-      timeEl.textContent = formatTime(seconds);
+      if (hudSingle) hudSingle.classList.remove("hidden");
+      if (hudMulti) hudMulti.classList.add("hidden");
+      if (movesEl) movesEl.textContent = String(moves);
+      if (scoreEl) scoreEl.textContent = String(score);
+      if (pairsEl) pairsEl.textContent = String(matchedPairs);
+      if (totalPairsEl) totalPairsEl.textContent = String(totalPairs);
+      if (timeEl) timeEl.textContent = formatTime(seconds);
     } else {
-      hudSingle.classList.add("hidden");
-      hudMulti.classList.remove("hidden");
-      p1El.textContent = String(p1);
-      p2El.textContent = String(p2);
-      turnEl.textContent = turn === 1 ? "P1" : "P2";
-      pairs2El.textContent = String(matchedPairs);
-      totalPairs2El.textContent = String(totalPairs);
-      time2El.textContent = formatTime(seconds);
+      if (hudSingle) hudSingle.classList.add("hidden");
+      if (hudMulti) hudMulti.classList.remove("hidden");
+      if (p1El) p1El.textContent = String(p1);
+      if (p2El) p2El.textContent = String(p2);
+      if (turnEl) turnEl.textContent = turn === 1 ? "P1" : "P2";
+      if (pairs2El) pairs2El.textContent = String(matchedPairs);
+      if (totalPairs2El) totalPairs2El.textContent = String(totalPairs);
+      if (time2El) time2El.textContent = formatTime(seconds);
     }
   }
 
-  /* simple generated sounds */
   function beep(type){
     if (!soundOn) return;
     try{
@@ -221,7 +222,6 @@
       else {
         if (turn === 1) p1++;
         else p2++;
-        // match => aceeași tură
       }
 
       resetTurn();
@@ -244,7 +244,6 @@
       firstCard.classList.remove("flipped");
       secondCard.classList.remove("flipped");
       resetTurn();
-
       if (mode === "multi") turn = (turn===1) ? 2 : 1;
       updateHUD();
     }, 650);
@@ -266,7 +265,6 @@
     score = 0;
     p1 = 0; p2 = 0; turn = 1;
 
-    // multiplayer always hard
     if (mode === "multi") diff = "hard";
     if (!DIFFICULTIES[diff]) diff = "easy";
 
@@ -276,14 +274,16 @@
     setBoardGrid(cfg.cols);
 
     const deck = buildDeck(cfg.pairs);
-    boardEl.innerHTML = "";
-    deck.forEach(c => boardEl.appendChild(createCard(c)));
+    if (boardEl){
+      boardEl.innerHTML = "";
+      deck.forEach(c => boardEl.appendChild(createCard(c)));
+    }
 
     updateHUD();
     showToast(mode === "single" ? `🎮 Single: ${diff.toUpperCase()}` : "🎮 Multiplayer 2P");
   }
 
-  newGameBtn.addEventListener("click", startGame);
+  if (newGameBtn) newGameBtn.addEventListener("click", startGame);
 
   // INIT
   const params = qs();
