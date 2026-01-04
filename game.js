@@ -103,9 +103,10 @@
   }
 
   function imagesList(pairs){
-    const list = Array.from({ length: TOTAL_IMAGES }, (_, i) => `assets/food${i+1}.png`);
-    return shuffle(list).slice(0, pairs);
-  }
+  const list = Array.from({ length: TOTAL_IMAGES }, (_, i) => `assets/food${i+1}.png`);
+  return shuffle(list).slice(0, pairs);
+}
+
 
   function buildDeck(pairs){
     const picks = imagesList(pairs);
