@@ -403,3 +403,56 @@ body{
   opacity: 1 !important;
   z-index: 2 !important;
 }
+/* =========================
+   FIX: FLIP doar pe .inner
+   (anulează dublu-flip)
+   ========================= */
+
+.card { perspective: 1000px !important; }
+
+.card .inner{
+  transform-style: preserve-3d !important;
+  transition: transform .32s cubic-bezier(.18, .95, .22, 1.15) !important;
+  transform: rotateY(0deg) !important;
+}
+
+.card.flipped .inner{
+  transform: rotateY(180deg) !important;
+}
+
+/* fețele NU se mai animă separat */
+.card .face{
+  position: absolute !important;
+  inset: 0 !important;
+  backface-visibility: hidden !important;
+  opacity: 1 !important;
+  z-index: auto !important;
+  transition: none !important;
+}
+
+/* front = normal */
+.card .front{
+  transform: rotateY(0deg) !important;
+}
+
+/* back = rotit 180 ca să apară când inner se întoarce */
+.card .back{
+  transform: rotateY(180deg) !important;
+}
+
+/* anulăm complet orice reguli vechi care schimbau opacități/z-index */
+.card.flipped .front,
+.card.flipped .back{
+  opacity: 1 !important;
+}
+
+/* centru sticker */
+.card .back img.food-img{
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  transform: translate(-50%,-50%) !important;
+  width: clamp(64px, 42%, 96px) !important;
+  height: clamp(64px, 42%, 96px) !important;
+  object-fit: contain !important;
+}
