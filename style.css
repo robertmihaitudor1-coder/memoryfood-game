@@ -246,42 +246,48 @@ button:active, .btnLink:active, .primaryBtnLink:active{
   box-shadow: inset 0 1px 0 rgba(255,255,255,.60);
 }
 
-/* BACK + STICKER (CENTRAT PERFECT, FĂRĂ TĂIERE) */
+/* BACK (STABLE) */
 .back{
   transform: rotateY(180deg);
   background:
     radial-gradient(28px 28px at 30% 30%, rgba(255,190,120,.14), transparent 65%),
     linear-gradient(180deg, var(--cardBack1), var(--cardBack2));
   border: 1px solid rgba(20,30,60,.10);
-
   position: relative;
-  display: grid;
-  place-items: center;
+
+  /* centrare sigură */
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
+/* badge simplu, sub imagine */
 .back::before{
   content:"";
   position:absolute;
-  inset: 14%;
+  width: 72%;
+  height: 72%;
   border-radius: 22px;
   background: rgba(255,255,255,.72);
   border: 1px solid rgba(20,30,60,.10);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
 }
 
-/* imagine sticker adaptivă la dimensiunea cardului */
+/* STICKER dinamic + centrat sigur */
 .back img.food-img{
   position: relative;
   z-index: 2;
-  display: block;
-  margin: 0;
+  display:block;
+  margin:0;
+  line-height: 0;
 
-  width: min(72%, 88px) !important;
-  height: min(72%, 88px) !important;
+  /* dinamic: mare pe easy, ok pe hard */
+  width: clamp(60px, 42%, 92px) !important;
+  height: clamp(60px, 42%, 92px) !important;
 
   object-fit: contain !important;
   pointer-events: none;
-  filter: drop-shadow(0 10px 12px rgba(15,25,45,.20));
+  filter: drop-shadow(0 10px 12px rgba(15,25,45,.18));
 }
 
 .toast{
