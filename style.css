@@ -168,20 +168,30 @@ button:active, .btnLink:active, .primaryBtnLink:active{
   justify-content:center;
 }
 
-/* Board width bun pentru easy/medium/hard */
 .board{
   width: min(760px, 96vw);
   display:grid;
   gap: 12px;
 }
 
-/* Card */
 .card{
   position:relative;
   aspect-ratio: 1 / 1;
   border-radius: var(--radius);
   perspective: 1000px;
 }
+
+/* scoate conturul negru la click */
+.card button:focus,
+.card button:focus-visible{
+  outline: none !important;
+}
+
+/* focus clean doar pe tastatura */
+.card button:focus-visible .inner{
+  box-shadow: 0 0 0 3px rgba(90,140,255,.35), var(--shadow);
+}
+
 .card button{
   width:100%;
   height:100%;
@@ -191,6 +201,7 @@ button:active, .btnLink:active, .primaryBtnLink:active{
   box-shadow:none;
   cursor:pointer;
 }
+
 .inner{
   width:100%;
   height:100%;
@@ -235,18 +246,19 @@ button:active, .btnLink:active, .primaryBtnLink:active{
   box-shadow: inset 0 1px 0 rgba(255,255,255,.60);
 }
 
-/* BACK + STICKER FORȚAT (NU MAI EXPLODEAZĂ IMAGINI) */
+/* BACK + STICKER (CENTRAT PERFECT, FĂRĂ TĂIERE) */
 .back{
   transform: rotateY(180deg);
   background:
     radial-gradient(28px 28px at 30% 30%, rgba(255,190,120,.14), transparent 65%),
     linear-gradient(180deg, var(--cardBack1), var(--cardBack2));
   border: 1px solid rgba(20,30,60,.10);
+
   position: relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: grid;
+  place-items: center;
 }
+
 .back::before{
   content:"";
   position:absolute;
@@ -257,12 +269,13 @@ button:active, .btnLink:active, .primaryBtnLink:active{
   box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
 }
 
-/* bate orice alt CSS: */
+/* imagine sticker adaptivă la dimensiunea cardului */
 .back img.food-img{
   position: relative;
   z-index: 2;
+  display: block;
+  margin: 0;
 
-  /* se adaptează la mărimea cardului */
   width: min(72%, 88px) !important;
   height: min(72%, 88px) !important;
 
@@ -284,14 +297,3 @@ button:active, .btnLink:active, .primaryBtnLink:active{
   box-shadow: var(--shadow2);
   z-index: 30;
 }
-/* Scoate conturul negru (focus) de la click */
-.card button:focus,
-.card button:focus-visible{
-  outline: none !important;
-}
-
-/* opțional: un focus mai “clean” (doar pe tastatură) */
-.card button:focus-visible .inner{
-  box-shadow: 0 0 0 3px rgba(90,140,255,.35), var(--shadow);
-}
-
