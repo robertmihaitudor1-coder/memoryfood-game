@@ -386,19 +386,34 @@ body{
   pointer-events: none !important;
 }
 
-/* poza PESTE badge */
-.face.back img.food-img{
-  z-index: 2 !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: block !important;
+/* Multiplayer / card mic: sticker mereu încape și e centrat */
+.face.back img.food-img,
+.back img.food-img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) !important;
+  /* cheia: mărime doar relativă, fără minim fix mare */
+  width: 70%;
+  height: 70%;
 
-  width: clamp(64px, 42%, 96px) !important;
-  height: clamp(64px, 42%, 96px) !important;
-  object-fit: contain !important;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+
+  /* asigură că nu iese în afară */
+  max-width: 70%;
+  max-height: 70%;
+
+  /* păstrăm shadow dar mai soft pe card mic */
+  filter: drop-shadow(0 6px 10px rgba(15,25,45,.16));
+  z-index: 2;
+}
+
+/* badge-ul sub imagine (ca să nu o acopere) */
+.face.back::before,
+.back::before{
+  z-index: 1;
 }
