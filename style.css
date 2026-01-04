@@ -6,16 +6,19 @@
   --text:#1a2133;
   --muted:#5a6686;
 
-  --card:#ffffffcc;
   --stroke: rgba(20,30,60,.12);
-  --shadow: 0 16px 40px rgba(15,25,45,.14);
+  --card: rgba(255,255,255,.82);
+
+  --shadow: 0 18px 50px rgba(15,25,45,.14);
+  --shadowSoft: 0 10px 26px rgba(15,25,45,.10);
 
   --r: 18px;
   --good: rgba(70,200,140,.55);
 }
 
+/* base */
 *{ box-sizing:border-box; }
-
+html, body{ height:100%; }
 body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
@@ -30,7 +33,9 @@ body{
 
 .hidden{ display:none !important; }
 
-/* ====== MENU PAGE ====== */
+/* ---------------------------------------
+   MENU PAGE
+---------------------------------------- */
 .menuWrap{
   min-height:100vh;
   display:flex;
@@ -44,8 +49,8 @@ body{
   background: var(--card);
   border: 1px solid var(--stroke);
   border-radius: 26px;
-  box-shadow: 0 22px 70px rgba(0,0,0,.18);
   padding: 18px;
+  box-shadow: 0 22px 70px rgba(0,0,0,.18);
   backdrop-filter: blur(10px);
 }
 
@@ -53,8 +58,8 @@ body{
   font-size: 30px;
   font-weight: 900;
   display:flex;
-  gap:10px;
   align-items:center;
+  gap:10px;
 }
 
 .menuSubtitle{
@@ -81,9 +86,9 @@ body{
   padding: 12px;
   border-radius: 14px;
   border: 1px solid rgba(20,30,60,.10);
-  background: rgba(255,255,255,.70);
+  background: rgba(255,255,255,.75);
   box-shadow: 0 10px 24px rgba(15,25,45,.08);
-  font-weight: 800;
+  font-weight: 850;
   cursor:pointer;
   transition: transform .12s ease, border-color .12s ease, background .12s ease;
 }
@@ -103,9 +108,9 @@ body{
   padding: 12px 10px;
   border-radius: 14px;
   border: 1px solid rgba(20,30,60,.10);
-  background: rgba(255,255,255,.70);
+  background: rgba(255,255,255,.75);
   box-shadow: 0 10px 24px rgba(15,25,45,.08);
-  font-weight: 800;
+  font-weight: 850;
   cursor:pointer;
   transition: transform .12s ease, border-color .12s ease, background .12s ease;
 }
@@ -136,7 +141,8 @@ body{
   border: 1px solid rgba(20,30,60,.10);
   background: rgba(255,255,255,.65);
   cursor:pointer;
-  font-weight: 800;
+  font-weight: 850;
+  box-shadow: 0 10px 24px rgba(15,25,45,.06);
 }
 
 .howBox{
@@ -146,7 +152,6 @@ body{
   background: rgba(255,255,255,.65);
   border: 1px solid rgba(20,30,60,.10);
 }
-
 .howTitle{ font-weight: 900; margin-bottom: 6px; }
 .howList{ margin:0; padding-left: 18px; color: var(--muted); }
 
@@ -158,7 +163,7 @@ body{
   text-decoration:none;
   padding: 14px 14px;
   border-radius: 16px;
-  font-weight: 900;
+  font-weight: 950;
   border: 1px solid rgba(60,120,255,.30);
   background: rgba(60,120,255,.16);
   box-shadow: 0 16px 38px rgba(60,120,255,.12);
@@ -170,7 +175,9 @@ body{
 
 .menuFoot{ margin-top: 14px; color: var(--muted); font-size: 12px; }
 
-/* ====== GAME PAGE ====== */
+/* ---------------------------------------
+   GAME PAGE TOP BAR
+---------------------------------------- */
 .topbar{
   display:flex;
   align-items:center;
@@ -210,6 +217,7 @@ body{
 
 .actions{ display:flex; gap:10px; }
 
+/* buttons / links in game */
 .btnLink, button{
   cursor:pointer;
   padding: 10px 14px;
@@ -219,7 +227,7 @@ body{
   color: var(--text);
   box-shadow: 0 10px 24px rgba(15,25,45,.08);
   text-decoration:none;
-  font-weight: 800;
+  font-weight: 850;
   transition: transform .12s ease, border-color .12s ease;
 }
 .btnLink:hover, button:hover{
@@ -230,6 +238,9 @@ body{
   transform: translateY(1px) scale(.99);
 }
 
+/* ---------------------------------------
+   BOARD
+---------------------------------------- */
 .wrap{
   padding: 18px 16px 28px;
   display:flex;
@@ -242,6 +253,7 @@ body{
   gap: 12px;
 }
 
+/* CARD */
 .card{
   position: relative;
   aspect-ratio: 1 / 1;
@@ -256,6 +268,7 @@ body{
   border:none;
   background:none;
   box-shadow:none;
+  cursor:pointer;
 }
 .card button:focus,
 .card button:focus-visible{ outline:none; }
@@ -267,10 +280,12 @@ body{
   transform-style: preserve-3d;
   transition: transform .32s cubic-bezier(.18, .95, .22, 1.15);
   box-shadow: var(--shadow);
+  transform: rotateY(0deg);
 }
 .card.flipped .inner{ transform: rotateY(180deg); }
 .card.matched .inner{ outline: 3px solid var(--good); }
 
+/* faces */
 .face{
   position:absolute;
   inset:0;
@@ -280,6 +295,7 @@ body{
   border: 1px solid rgba(20,30,60,.10);
 }
 
+/* FRONT (stars) */
 .front{
   display:flex;
   align-items:center;
@@ -303,7 +319,7 @@ body{
   font-size: 36px;
 }
 
-/* BACK – centrare absolută garantată (nu se taie, nu se duce sus) */
+/* BACK (image) — IMPORTANT: rotit 180, apare când inner se întoarce */
 .back{
   transform: rotateY(180deg);
   background:
@@ -312,7 +328,7 @@ body{
   position: relative;
 }
 
-/* badge */
+/* badge in spate */
 .back::before{
   content:"";
   position:absolute;
@@ -327,7 +343,7 @@ body{
   box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
 }
 
-/* sticker */
+/* sticker centrat + adaptiv (mai mare pe easy) */
 .back img.food-img{
   position:absolute;
   left:50%;
@@ -341,6 +357,7 @@ body{
   filter: drop-shadow(0 10px 12px rgba(15,25,45,.18));
 }
 
+/* toast */
 .toast{
   position: fixed;
   left: 50%;
@@ -351,108 +368,6 @@ body{
   padding: 10px 14px;
   border-radius: 999px;
   color: var(--text);
-  box-shadow: 0 10px 24px rgba(15,25,45,.10);
+  box-shadow: var(--shadowSoft);
   z-index: 30;
-}
-/* =========================
-   FIX FLIP CARD DEFINITIV
-   ========================= */
-
-.card{
-  perspective: 1000px !important;
-}
-
-.card .inner{
-  position: relative !important;
-  width: 100%;
-  height: 100%;
-}
-
-/* FETELE */
-.card .face{
-  position: absolute !important;
-  inset: 0 !important;
-  border-radius: var(--radius);
-  backface-visibility: hidden !important;
-  transition: transform .45s ease, opacity .25s ease;
-}
-
-/* FRONT (⭐) */
-.card .front{
-  z-index: 2 !important;
-  transform: rotateY(0deg) !important;
-  opacity: 1 !important;
-}
-
-/* BACK (IMAGINE) */
-.card .back{
-  z-index: 1 !important;
-  transform: rotateY(180deg) !important;
-  opacity: 0 !important;
-}
-
-/* CÂND CARDUL E ÎNTORS */
-.card.flipped .front{
-  transform: rotateY(180deg) !important;
-  opacity: 0 !important;
-  z-index: 1 !important;
-}
-
-.card.flipped .back{
-  transform: rotateY(0deg) !important;
-  opacity: 1 !important;
-  z-index: 2 !important;
-}
-/* =========================
-   FIX: FLIP doar pe .inner
-   (anulează dublu-flip)
-   ========================= */
-
-.card { perspective: 1000px !important; }
-
-.card .inner{
-  transform-style: preserve-3d !important;
-  transition: transform .32s cubic-bezier(.18, .95, .22, 1.15) !important;
-  transform: rotateY(0deg) !important;
-}
-
-.card.flipped .inner{
-  transform: rotateY(180deg) !important;
-}
-
-/* fețele NU se mai animă separat */
-.card .face{
-  position: absolute !important;
-  inset: 0 !important;
-  backface-visibility: hidden !important;
-  opacity: 1 !important;
-  z-index: auto !important;
-  transition: none !important;
-}
-
-/* front = normal */
-.card .front{
-  transform: rotateY(0deg) !important;
-}
-
-/* back = rotit 180 ca să apară când inner se întoarce */
-.card .back{
-  transform: rotateY(180deg) !important;
-}
-
-/* anulăm complet orice reguli vechi care schimbau opacități/z-index */
-.card.flipped .front,
-.card.flipped .back{
-  opacity: 1 !important;
-}
-
-/* centru sticker */
-.card .back img.food-img{
-  position:absolute !important;
-  left:50% !important;
-  top:50% !important;
-  transform: translate(-50%,-50%) !important;
-  width: clamp(64px, 42%, 96px) !important;
-  height: clamp(64px, 42%, 96px) !important;
-  object-fit: contain !important;
 }
