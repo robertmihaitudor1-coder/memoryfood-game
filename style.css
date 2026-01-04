@@ -371,3 +371,34 @@ body{
   box-shadow: var(--shadowSoft);
   z-index: 30;
 }
+/* === FIX FINAL: back blank (poză acoperită / invizibilă) === */
+.face.back{
+  position: absolute !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+  border-radius: var(--r) !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.82)) !important;
+}
+
+/* badge-ul SUB poză */
+.face.back::before{
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* poza PESTE badge */
+.face.back img.food-img{
+  z-index: 2 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+
+  width: clamp(64px, 42%, 96px) !important;
+  height: clamp(64px, 42%, 96px) !important;
+  object-fit: contain !important;
+}
