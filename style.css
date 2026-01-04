@@ -261,10 +261,11 @@ button:active, .btnLink:active, .primaryBtnLink:active{
 .back img.food-img{
   position: relative;
   z-index: 2;
-  width: 64px !important;
-  height: 64px !important;
-  max-width: 70% !important;
-  max-height: 70% !important;
+
+  /* se adaptează la mărimea cardului */
+  width: min(72%, 88px) !important;
+  height: min(72%, 88px) !important;
+
   object-fit: contain !important;
   pointer-events: none;
   filter: drop-shadow(0 10px 12px rgba(15,25,45,.20));
@@ -283,3 +284,14 @@ button:active, .btnLink:active, .primaryBtnLink:active{
   box-shadow: var(--shadow2);
   z-index: 30;
 }
+/* Scoate conturul negru (focus) de la click */
+.card button:focus,
+.card button:focus-visible{
+  outline: none !important;
+}
+
+/* opțional: un focus mai “clean” (doar pe tastatură) */
+.card button:focus-visible .inner{
+  box-shadow: 0 0 0 3px rgba(90,140,255,.35), var(--shadow);
+}
+
