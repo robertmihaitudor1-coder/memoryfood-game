@@ -1,305 +1,43 @@
-:root{
-  --bgA:#f4f7ff;
-  --bgB:#eefaf7;
-  --bgC:#fff7ef;
+/* === OVERRIDE FINAL: back/sticker centrat garantat === */
+.face.back{
+  position: absolute !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+  border-radius: var(--radius) !important;
 
-  --text:#1a2133;
-  --muted:#4b5878;
-
-  --shadow: 0 10px 26px rgba(15, 25, 45, .12);
-  --shadow2: 0 8px 18px rgba(15, 25, 45, .10);
-
-  --radius: 18px;
-
-  --cardFront1: rgba(255,255,255,.92);
-  --cardFront2: rgba(255,255,255,.78);
-
-  --cardBack1: rgba(255,255,255,.95);
-  --cardBack2: rgba(255,255,255,.82);
-
-  --outlineGood: rgba(70, 200, 140, .60);
+  /* nu mai folosim flex/grid aici */
+  display: block !important;
 }
 
-*{ box-sizing:border-box; }
+.face.back::before{
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
 
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  color: var(--text);
-  background:
-    radial-gradient(900px 520px at 15% 10%, rgba(90,140,255,.10), transparent 65%),
-    radial-gradient(800px 560px at 85% 20%, rgba(60,220,190,.08), transparent 65%),
-    radial-gradient(900px 650px at 40% 85%, rgba(255,190,120,.08), transparent 70%),
-    linear-gradient(120deg, var(--bgA), var(--bgB) 55%, var(--bgC));
-  background-attachment: fixed;
-}
+  width: 72% !important;
+  height: 72% !important;
+  border-radius: 22px !important;
 
-/* Buttons */
-button, .btnLink, .primaryBtnLink{
-  cursor:pointer;
-  padding:10px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(20,30,60,.12);
-  background: rgba(255,255,255,.70);
-  color: var(--text);
-  box-shadow: var(--shadow2);
-  transition: transform .12s ease, filter .12s ease, border-color .12s ease;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-}
-button:hover, .btnLink:hover, .primaryBtnLink:hover{
-  border-color: rgba(60,120,255,.28);
-  transform: translateY(-1px);
-  filter: brightness(1.02);
-}
-button:active, .btnLink:active, .primaryBtnLink:active{
-  transform: translateY(1px) scale(.99);
-}
-.hidden{ display:none !important; }
-
-/* MENU */
-.menuWrap{
-  min-height: 100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding: 22px;
-}
-.menuCard{
-  width: min(560px, 92vw);
-  border-radius: 24px;
-  background: rgba(255,255,255,.80);
-  border: 1px solid rgba(20,30,60,.12);
-  box-shadow: 0 22px 60px rgba(0,0,0,.18);
-  padding: 18px;
-}
-.menuTitle{ font-size: 30px; font-weight: 900; }
-.menuSubtitle{ margin-top: 6px; color: var(--muted); }
-.menuSection{ margin-top: 16px; }
-.menuLabel{ font-weight: 900; margin-bottom: 10px; }
-.menuHint{ color: var(--muted); font-size: 13px; margin-top: 8px; }
-.segmented{ display:flex; gap:10px; }
-.segBtn{ flex:1; padding: 12px; }
-.segBtn.active{
-  border-color: rgba(60,120,255,.35);
-  background: rgba(90,140,255,.14);
-}
-.difficultyGrid{
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-}
-.diffBtn{ padding: 12px 10px; }
-.diffBtn.active{
-  border-color: rgba(60,120,255,.35);
-  background: rgba(90,140,255,.14);
-}
-.menuRow{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.toggle{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  font-weight: 900;
-}
-.toggle input{ transform: scale(1.15); }
-.ghostBtn{ background: rgba(255,255,255,.65); }
-.primaryBtnLink{
-  width:100%;
-  padding: 13px 14px;
-  font-weight: 900;
-  background: rgba(60,120,255,.15);
-  border-color: rgba(60,120,255,.28);
-}
-.howBox{
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(20,30,60,.10);
-}
-.howTitle{ font-weight: 900; margin-bottom: 6px; }
-.howList{ margin: 0; padding-left: 18px; color: var(--muted); }
-.menuFoot{ margin-top: 14px; color: var(--muted); font-size: 12px; }
-
-/* GAME */
-.topbar{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:14px 16px;
-  position:sticky;
-  top:0;
-  z-index:20;
-  background: rgba(255,255,255,.70);
-  border-bottom: 1px solid rgba(20,30,60,.10);
-  backdrop-filter: blur(10px);
-}
-.brand{ font-weight:900; white-space:nowrap; }
-.stats{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-left:auto;
-  margin-right:auto;
-  justify-content:center;
-}
-.pill{
-  padding:8px 11px;
-  border-radius:999px;
-  background: rgba(255,255,255,.70);
-  border: 1px solid rgba(20,30,60,.10);
-  color: var(--muted);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
-}
-.pill span{ color: var(--text); font-weight:900; }
-.actions{ display:flex; gap:10px; }
-
-.wrap{
-  padding: 18px 16px 28px;
-  display:flex;
-  justify-content:center;
+  background: rgba(255,255,255,.72) !important;
+  border: 1px solid rgba(20,30,60,.10) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7) !important;
 }
 
-.board{
-  width: min(760px, 96vw);
-  display:grid;
-  gap: 12px;
-}
+.face.back img.food-img{
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
 
-.card{
-  position:relative;
-  aspect-ratio: 1 / 1;
-  border-radius: var(--radius);
-  perspective: 1000px;
-}
-
-/* scoate conturul negru la click */
-.card button:focus,
-.card button:focus-visible{
-  outline: none !important;
-}
-
-/* focus clean doar pe tastatura */
-.card button:focus-visible .inner{
-  box-shadow: 0 0 0 3px rgba(90,140,255,.35), var(--shadow);
-}
-
-.card button{
-  width:100%;
-  height:100%;
-  border:none;
-  padding:0;
-  background:none;
-  box-shadow:none;
-  cursor:pointer;
-}
-
-.inner{
-  width:100%;
-  height:100%;
-  border-radius: var(--radius);
-  transform-style: preserve-3d;
-  transition: transform .32s cubic-bezier(.18, .95, .22, 1.15);
-  box-shadow: var(--shadow);
-}
-.card.flipped .inner{ transform: rotateY(180deg); }
-.card.matched .inner{ outline: 3px solid var(--outlineGood); }
-
-.face{
-  position:absolute;
-  inset:0;
-  border-radius: var(--radius);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backface-visibility: hidden;
-  user-select:none;
-  overflow:hidden;
-}
-
-.front{
-  background:
-    radial-gradient(18px 18px at 25% 25%, rgba(90,140,255,.16), transparent 65%),
-    radial-gradient(22px 22px at 75% 35%, rgba(60,220,190,.12), transparent 65%),
-    linear-gradient(180deg, var(--cardFront1), var(--cardFront2));
-  border: 1px solid rgba(20,30,60,.10);
-}
-.front .mark{
-  width: 62%;
-  height: 62%;
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(90,140,255,.16), rgba(255,255,255,.70) 60%),
-    linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.45));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size: 36px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.60);
-}
-
-/* BACK (STABLE) */
-.back{
-  transform: rotateY(180deg);
-  background:
-    radial-gradient(28px 28px at 30% 30%, rgba(255,190,120,.14), transparent 65%),
-    linear-gradient(180deg, var(--cardBack1), var(--cardBack2));
-  border: 1px solid rgba(20,30,60,.10);
-  position: relative;
-
-  /* centrare sigură */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* badge simplu, sub imagine */
-.back::before{
-  content:"";
-  position:absolute;
-  width: 72%;
-  height: 72%;
-  border-radius: 22px;
-  background: rgba(255,255,255,.72);
-  border: 1px solid rgba(20,30,60,.10);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
-}
-
-/* STICKER dinamic + centrat sigur */
-.back img.food-img{
-  position: relative;
-  z-index: 2;
-  display:block;
-  margin:0;
-  line-height: 0;
-
-  /* dinamic: mare pe easy, ok pe hard */
-  width: clamp(60px, 42%, 92px) !important;
-  height: clamp(60px, 42%, 92px) !important;
+  /* mărime adaptivă: mare pe easy, ok pe hard */
+  width: clamp(64px, 42%, 96px) !important;
+  height: clamp(64px, 42%, 96px) !important;
 
   object-fit: contain !important;
-  pointer-events: none;
-  filter: drop-shadow(0 10px 12px rgba(15,25,45,.18));
-}
-
-.toast{
-  position: fixed;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,.82);
-  border: 1px solid rgba(20,30,60,.12);
-  padding: 10px 14px;
-  border-radius: 999px;
-  color: var(--text);
-  box-shadow: var(--shadow2);
-  z-index: 30;
+  pointer-events: none !important;
+  display: block !important;
+  margin: 0 !important;
+  filter: drop-shadow(0 10px 12px rgba(15,25,45,.18)) !important;
 }
